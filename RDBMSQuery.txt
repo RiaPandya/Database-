@@ -1,0 +1,40 @@
+show databases; # will show all the available databases 
+
+drop database database_name  : it will remeove the database 
+example drop database bihs;
+#query to create database
+
+create database python_class;
+
+# to write query in the database we need to go to that database
+
+use python_class;
+
+show tables;  # to show all the tables in database
+
+# create table : create the table 
+create table <table_name>(column_name data_type(size) , ..., column_nmaen data_type(size));
+
+## constraints : limitations 
+- to provide some conditions 
+create table <table_name>(column_name data_type(size) constraint , ..., column_nmaen data_type(size));
+
+1. Unique Constraint : te column value will not repeat , but it can be null .
+2. Primary Key constraint: to make column as primary key 
+3. Default Constraint: default value of the column has been assigned . 
+4. Check Constraint : at the time of insertion of value the constraint is checked before insertion into table .
+5. Foreign Key Contraint
+
+create table student (sid int PRIMARY KEY check (sid >0) , sname varchar(50) NOT NULL, saddress varchar(50) NOT NULL , gender char(1) , subject varchar(50) default 'CS');
+create table student (sid int PRIMARY KEY  , sname varchar(50) NOT NULL, saddress varchar(50) NOT NULL , gender char(1) , subject varchar(50) default 'CS' , medium varchar(50), constraint check((sid>0) and (medium in ('English' , 'Hindi'))));
+create table employee (empid varchar(20) , ename varchar(50) , salary float , PRIMARY KEY(empid) , check(salary>1000));
+
+
+# insertion into table 
+insert into table_name(column_name1, column_nmae2 ,..., column_nmaen) values ( value1 , value 2,..., value n);
+
+insert into ttable_name (value1 , value2 , ...,valuen)
+
+in-sert into student (sid , sname , saddress, gender , medium) values(0 , 'Bhavya' , '11-Rattalai ' , 'M' , 'Gujrati');
+
+

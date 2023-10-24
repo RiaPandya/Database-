@@ -1,0 +1,72 @@
+create table student (sid int , sname varchar(50) not NULL , saddress varchar(100) , s_phone_no long, PRIMARY KEY(sid));
+describe student;
+truncate table employee; ( delete data in table)
+drop table employee; ( delete complete table)
+
+Alter Command: change
+alter table student add age int;  (add age in table)
+alter table student add(city varchar(30) , subject varchar(40)); ( add city and subject into table)
+alter table student drop saddress;  (delete saddress column)
+
+update bihsstudent set city ='Jaipur' where sid = 1;
+select * from bihsstudent;
+create table library (sid int REFERENCES student(sid), book_no varchar(50) , book_name varchar(50), book_price float);
+
+create table library1 (sid int , branch varchar(50) , book_nmae varchar(50) , book_price float , FOREIGN KEY(sid) REFERENCES bihsstudent(sid));
+
+create view emp1 as select ename , salary from employee;
+create view emp2 as select * from employee where dept_nmae = 'Selling' OR 'Marketing';
+rename table student to bihsStudent; ( change the table name)
+
+DML : Manipulation Commands
+insert into bihsstudent(sid , sname , s_phone_no, age , city , subject) values(01 , 'Ria' , 1234567890 , 30 , 'Udaipur' , 'Computer Science');
+insert into bihsstudent values(04 , 'Ram' , 235786078 , 15 , 'Banswara' , 'Biology');
+select * from bihsstudent;
+select sname , city from bihsstudent;
+select * from bihsstudent where subject = 'Maths';
+select * from bihsstudent where age >15;
+select sid , sname , city where city = 'Udaipur';
+select subject from bihsstudent;
+select distinct subject from bihsstudent;
+select distinct city from bihsstudent;
+select * from employee;
+select eid , ename , salary , (salary*12) as annual_package from employee;
+select * from employee where age BETWEEN 30 AND 33;
+
+select * from bihsstudent where sname='Ria' OR city='Jaipur';
+select sid , sname , city from bihsstudent where not city='Banswara';
+
+
+
+select * from bihsstudent;
+select * from bihsstudent order by sname;
+select * from bihsstudent order by sname desc;
+
+select sid , sname , age from bihsstudent order by age;
+
+
+select sid , sname , city from bihsstudent where sname LIKE 'S%';
+select sid , sname , city from bihsstudent where sname LIKE 'R%';
+select sid , sname , city from bihsstudent where sname LIKE '_i%';
+select sid , sname , city from bihsstudent where sname LIKE '__t%';
+select sid , sname , city from bihsstudent where sname LIKE '%a';
+select sid , sname from bihsstudent where sname IN ('Ria' , 'Beauty');
+select sid , sname from bihsstudent where sname NOT IN ('Ria' , 'Beauty');
+
+select MAX(salary) as MaximumnSalary from employee ;
+select MIN(salary) as MinimumnSalary from employee ;
+select AVG(salary) as AverageSalary from employee ;
+select SUM(salary) as TotalSalary from employee ;
+select COUNT(salary) as TotalEmployee from employee ;
+select dept_nmae , SUM(salary) from employee group by dept_nmae;
+select dept_nmae , AVG(salary) from employee group by dept_nmae having AVG(salary)>24500;
+
+
+select dept_nmae , AVG(salary) from employee group by dept_nmae having AVG(salary)>35000;
+select dept_nmae , Max(age) from employee GROUP by dept_nmae having MAX(age)>26;
+select * from employee where salary =(select MIN(salary) from employee);
+select ename , dept_nmae , salary from employee where salary > ALL(select AVG(salary) from employee);
+select ename , dept_nmae, salary from employee where salary IN (select MIN(salary) from employee GROUP by dept_nmae); 
+select ename , dept_nmae, salary from employee 
+where salary >= 
+(SELECT AVG(salary) from employee where dept_nmae='Marketing' AND dept_nmae!='Selling');
